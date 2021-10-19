@@ -1,0 +1,91 @@
+﻿<Window x:Class="infcodLab1.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:infcodLab1.Views"
+        mc:Ignorable="d"
+        Title="Лабораторная №1 Денисенко" Height="570" Width="340" MinWidth="325">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="69"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+                
+        <!-- HEAD -->
+        <Grid Grid.Row="0" Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Входные данные" Foreground="#FF939393" Margin="0,-3,0,47" Grid.ColumnSpan="3"/>
+
+            <Label Content="N:" Margin="6,19,14,25"/>
+            <TextBox x:Name="N" Grid.Column="0" Text="9" Margin="10,40,10,10"/>
+
+            <TextBox x:Name="expAmt" Grid.Column="1" Text="10" Margin="10,40,10,10"/>
+
+            <Button x:Name="RunExperiments" Grid.Column="2" Content="Вычислить" Margin="10,40,10,10"/>
+            <Label Content="Повторения:" Margin="6,19,14,25" Grid.Column="1"/>
+        </Grid>
+
+        <!-- BODY -->
+        <Grid Grid.Row="1" Margin="0,5,0,5">
+            <ScrollViewer>
+                <StackPanel>
+                    <ItemsControl x:Name="Experiments">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Title}" Height="auto" Margin="0,2,0,2" Padding="10,0,10,0" Background="AliceBlue">
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Margin="0,0,5,0">
+                                            <ItemsControl ItemsSource="{Binding px}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border BorderThickness="1" BorderBrush="Black">
+                                                            <TextBlock Text="{Binding}" Padding="2"/>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                            <TextBlock Text="{Binding ix}"/>
+                                            <TextBlock Text="{Binding hx}"/>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- BOTTOM -->
+        <Grid Grid.Row="2" Background="AliceBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Результаты всех экспериментов" Foreground="#FF939393" Grid.ColumnSpan="2" Margin="0,-3,0,26"/>
+
+
+            <Label   Grid.Column="0" Content="&lt;I(x)&gt;: " Margin="10,15,0,5" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="64"/>
+            <TextBox Grid.Column="0" Margin="79,20,10,8" FontSize="14" Text="{Binding Path=totalI, Mode=OneWay}" IsReadOnly="True"/>
+
+            <Label   Grid.Column="1" Content="H(x)max: " Margin="10,15,0,5" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="64"/>
+            <TextBox Grid.Column="1" Margin="79,20,10,8" FontSize="14" x:Name="totalH" IsReadOnly="True" />
+
+        </Grid>
+
+    </Grid>
+</Window>
